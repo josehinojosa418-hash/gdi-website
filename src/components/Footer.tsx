@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="inline-block bg-white px-3 py-2 mb-6">
               <Image
-                src="/GDI_logo_bueno.png"
+                src="/GDI_logo_v2.png"
                 alt="GDI - Grupo Desarrollador Industrial"
                 width={160}
                 height={64}
