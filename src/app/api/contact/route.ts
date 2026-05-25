@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export async function POST(req: NextRequest) {
   const { nombre, empresa, email, telefono, tipo, mensaje } = await req.json();
@@ -8,15 +8,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Campos requeridos faltantes." }, { status: 400 });
   }
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: Number(process.env.SMTP_PORT) || 587,
-    secure: false,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -52,8 +44,8 @@ export async function POST(req: NextRequest) {
   `;
 
   try {
-    await transporter.sendMail({
-      from: `"GDI Website" <${process.env.SMTP_USER}>`,
+    await resend.emails.send({
+      from: "GDI Website <onboarding@resend.dev>",
       to: "grupogdi@gdisa.com",
       replyTo: email,
       subject: `[GDI] Nueva solicitud: ${tipo} — ${nombre}`,
