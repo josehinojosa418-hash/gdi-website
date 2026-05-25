@@ -339,7 +339,7 @@ export default function ContactoPage() {
               Primera Privada de Séneca 116-14, Col. Polanco, C.P. 11560, Ciudad de México
             </p>
             <a
-              href="https://maps.google.com/?q=Primera+Privada+de+Seneca+116,+Polanco,+11560+Ciudad+de+Mexico"
+              href="https://maps.app.goo.gl/WEt1h3UMwUSZms6FA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-3 text-xs font-display font-semibold uppercase tracking-widest text-[#e63946] hover:text-[#c1121f] transition-colors duration-200"
@@ -352,7 +352,7 @@ export default function ContactoPage() {
           <div className="relative w-full overflow-hidden border border-gray-200" style={{ height: "420px" }}>
             <iframe
               title="Ubicación GDI — Polanco, Ciudad de México"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-99.2010%2C19.4260%2C-99.1870%2C19.4400&layer=mapnik&marker=19.4330%2C-99.1940"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-99.2089%2C19.4308%2C-99.1949%2C19.4448&layer=mapnik&marker=19.4378%2C-99.2019"
               width="100%"
               height="420"
               style={{ border: 0 }}
