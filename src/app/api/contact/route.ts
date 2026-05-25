@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   try {
     await resend.emails.send({
       from: "GDI Website <onboarding@resend.dev>",
-      to: "grupogdi@gdisa.com",
+      to: "josehinojosa418@gmail.com",
       replyTo: email,
       subject: `[GDI] Nueva solicitud: ${tipo} — ${nombre}`,
       html,
