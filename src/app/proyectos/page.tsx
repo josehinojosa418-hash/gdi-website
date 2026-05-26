@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,7 +51,7 @@ const projects = [
     client: "Universidad La Salle",
     amount: "$20.6M",
     category: "educacion" as Category,
-    images: ["/projects/p04-pabellon-lasalle/img1.jpg", "/projects/p04-pabellon-lasalle/img2.jpg", "/projects/p04-pabellon-lasalle/img3.jpg"],
+    images: ["/projects/p04-pabellon-lasalle/img1.jpg", "/projects/p04-pabellon-lasalle/img2.jpg", "/projects/p04-pabellon-lasalle/img3.jpg", "/projects/p04-pabellon-lasalle/img4.jpg"],
     desc: "Construcción de nuevo pabellón académico en campus Benjamín Hill.",
   },
   {
@@ -62,7 +62,7 @@ const projects = [
     client: "Universidad La Salle",
     amount: "$30.7M",
     category: "educacion" as Category,
-    images: ["/projects/p05-preparatoria-neza/img1.jpg", "/projects/p05-preparatoria-neza/img2.jpg", "/projects/p05-preparatoria-neza/img3.jpg"],
+    images: ["/projects/p05-preparatoria-neza/img1.jpg", "/projects/p05-preparatoria-neza/img2.jpg", "/projects/p05-preparatoria-neza/img3.jpg", "/projects/p05-preparatoria-neza/img4.jpg"],
     desc: "Construcción del campus de preparatoria La Salle en Nezahualcóyotl.",
   },
   {
@@ -106,7 +106,7 @@ const projects = [
     client: "INAH / Secretaría de Cultura",
     amount: "$23.9M",
     category: "patrimonio" as Category,
-    images: ["/projects/p09-exconvento/img1.jpg", "/projects/p09-exconvento/img2.jpg", "/projects/p09-exconvento/img3.jpg"],
+    images: ["/projects/p09-exconvento/img1.jpg", "/projects/p09-exconvento/img2.jpg", "/projects/p09-exconvento/img3.jpg", "/projects/p09-exconvento/img4.jpg", "/projects/p09-exconvento/img5.jpg", "/projects/p09-exconvento/img6.jpg", "/projects/p09-exconvento/img7.jpg"],
     desc: "Restauración de exconvento colonial declarado Patrimonio de la Humanidad.",
   },
   {
@@ -117,7 +117,7 @@ const projects = [
     client: "Suprema Corte de Justicia de la Nación",
     amount: "$16.2M",
     category: "patrimonio" as Category,
-    images: ["/projects/p10-canal-judicial/img1.jpg", "/projects/p10-canal-judicial/img2.jpg", "/projects/p10-canal-judicial/img3.jpg"],
+    images: ["/projects/p10-canal-judicial/img1.jpg", "/projects/p10-canal-judicial/img2.jpg", "/projects/p10-canal-judicial/img3.jpg", "/projects/p10-canal-judicial/img4.jpg"],
     desc: "Restauración del edificio histórico sede del Canal Judicial.",
   },
   {
@@ -128,7 +128,7 @@ const projects = [
     client: "INAH / Gobierno de Campeche",
     amount: "$48.6M",
     category: "patrimonio" as Category,
-    images: ["/projects/p11-murallas/img1.jpg", "/projects/p11-murallas/img2.jpg", "/projects/p11-murallas/img3.jpg"],
+    images: ["/projects/p11-murallas/img1.jpg", "/projects/p11-murallas/img2.jpg", "/projects/p11-murallas/img3.jpg", "/projects/p11-murallas/img4.jpg", "/projects/p11-murallas/img5.jpg", "/projects/p11-murallas/img6.jpg"],
     desc: "Restauración integral de las Murallas de Campeche, Patrimonio de la Humanidad UNESCO.",
   },
   {
@@ -139,7 +139,7 @@ const projects = [
     client: "UNAM",
     amount: "$8.4M",
     category: "cultura" as Category,
-    images: ["/projects/p12-museo-constituciones/img1.jpg", "/projects/p12-museo-constituciones/img2.jpg", "/projects/p12-museo-constituciones/img3.jpg"],
+    images: ["/projects/p12-museo-constituciones/img1.jpg", "/projects/p12-museo-constituciones/img2.jpg", "/projects/p12-museo-constituciones/img3.jpg", "/projects/p12-museo-constituciones/img4.jpg", "/projects/p12-museo-constituciones/img5.jpg"],
     desc: "Adecuación del espacio histórico para albergar el Museo de las Constituciones.",
   },
   {
@@ -150,7 +150,7 @@ const projects = [
     client: "INAH / Secretaría de Cultura",
     amount: "$13.4M",
     category: "patrimonio" as Category,
-    images: ["/projects/p13-plaza-gamio/img1.jpg", "/projects/p13-plaza-gamio/img2.jpg", "/projects/p13-plaza-gamio/img3.jpg"],
+    images: ["/projects/p13-plaza-gamio/img1.jpg", "/projects/p13-plaza-gamio/img2.jpg", "/projects/p13-plaza-gamio/img3.jpg", "/projects/p13-plaza-gamio/img4.jpg", "/projects/p13-plaza-gamio/img5.jpg", "/projects/p13-plaza-gamio/img6.jpg", "/projects/p13-plaza-gamio/img7.jpg"],
     desc: "Proyecto arquitectónico para revalorización de la Plaza Gamio en el Templo Mayor.",
   },
   {
@@ -161,7 +161,7 @@ const projects = [
     client: "INAH",
     amount: "Post-sismo",
     category: "patrimonio" as Category,
-    images: ["/projects/p14-apuntalamientos/img1.jpg", "/projects/p14-apuntalamientos/img2.jpg", "/projects/p14-apuntalamientos/img3.jpg"],
+    images: ["/projects/p14-apuntalamientos/img1.jpg", "/projects/p14-apuntalamientos/img2.jpg", "/projects/p14-apuntalamientos/img3.jpg", "/projects/p14-apuntalamientos/img4.jpg", "/projects/p14-apuntalamientos/img5.jpg", "/projects/p14-apuntalamientos/img6.jpg", "/projects/p14-apuntalamientos/img7.jpg", "/projects/p14-apuntalamientos/img8.jpg"],
     desc: "Apuntalamiento de emergencia en edificios patrimoniales afectados por el sismo de 2017.",
   },
   {
@@ -172,7 +172,7 @@ const projects = [
     client: "UNAM",
     amount: "$70.2M",
     category: "educacion" as Category,
-    images: ["/projects/p15-enes-juriquilla/img1.jpg", "/projects/p15-enes-juriquilla/img2.jpg", "/projects/p15-enes-juriquilla/img3.jpg"],
+    images: ["/projects/p15-enes-juriquilla/img1.jpg", "/projects/p15-enes-juriquilla/img2.jpg", "/projects/p15-enes-juriquilla/img3.jpg", "/projects/p15-enes-juriquilla/img4.jpg", "/projects/p15-enes-juriquilla/img5.jpg", "/projects/p15-enes-juriquilla/img6.jpg", "/projects/p15-enes-juriquilla/img7.jpg", "/projects/p15-enes-juriquilla/img8.jpg"],
     desc: "Construcción de dos nuevos edificios académicos en la Escuela Nacional de Estudios Superiores campus Juriquilla.",
   },
   {
@@ -194,7 +194,7 @@ const projects = [
     client: "Arquidiócesis de México",
     amount: "$16.2M",
     category: "patrimonio" as Category,
-    images: ["/projects/p17-templo-jesus-maria/img1.jpg", "/projects/p17-templo-jesus-maria/img2.jpg", "/projects/p17-templo-jesus-maria/img3.jpg"],
+    images: ["/projects/p17-templo-jesus-maria/img1.jpg", "/projects/p17-templo-jesus-maria/img2.jpg", "/projects/p17-templo-jesus-maria/img3.jpg", "/projects/p17-templo-jesus-maria/img4.jpg"],
     desc: "Restauración integral del Templo de Jesús María en el Centro Histórico de la CDMX.",
   },
   {
@@ -205,7 +205,7 @@ const projects = [
     client: "SCT / Gobierno de Nayarit",
     amount: "—",
     category: "infraestructura" as Category,
-    images: ["/projects/p18-central-camionera/img1.jpg", "/projects/p18-central-camionera/img2.jpg", "/projects/p18-central-camionera/img3.jpg"],
+    images: ["/projects/p18-central-camionera/img1.jpg", "/projects/p18-central-camionera/img2.jpg", "/projects/p18-central-camionera/img3.jpg", "/projects/p18-central-camionera/img4.jpg", "/projects/p18-central-camionera/img5.jpg", "/projects/p18-central-camionera/img6.jpg", "/projects/p18-central-camionera/img7.jpg", "/projects/p18-central-camionera/img8.jpg"],
     desc: "Construcción de la Central de Autobuses de Tepic, Nayarit.",
   },
 ];
@@ -230,15 +230,26 @@ export default function ProyectosPage() {
 
   const currentProject = lightbox ? projects.find((p) => p.id === lightbox.projectId) : null;
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (!lightbox || !currentProject) return;
     setLightbox({ ...lightbox, imageIndex: (lightbox.imageIndex - 1 + currentProject.images.length) % currentProject.images.length });
-  };
+  }, [lightbox, currentProject]);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (!lightbox || !currentProject) return;
     setLightbox({ ...lightbox, imageIndex: (lightbox.imageIndex + 1) % currentProject.images.length });
-  };
+  }, [lightbox, currentProject]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowLeft") prevImage();
+      if (e.key === "ArrowRight") nextImage();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightbox, prevImage, nextImage]);
 
   return (
     <>
@@ -396,66 +407,89 @@ export default function ProyectosPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/97 flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-50 bg-black/97 flex flex-col"
             onClick={(e) => { if (e.target === e.currentTarget) setLightbox(null); }}
           >
-            <button
-              onClick={() => setLightbox(null)}
-              className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200"
-              aria-label="Cerrar"
-            >
-              <X size={20} />
-            </button>
+            {/* Header */}
+            <div className="flex items-start justify-between px-6 pt-5 pb-3 flex-shrink-0">
+              <div>
+                <p className="text-white font-display font-bold text-lg leading-snug">{currentProject.name}</p>
+                <p className="text-white/50 text-xs font-body mt-0.5">{currentProject.period} · {currentProject.location}</p>
+              </div>
+              <button
+                onClick={() => setLightbox(null)}
+                className="w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200 flex-shrink-0 ml-4"
+                aria-label="Cerrar"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-            <div className="absolute top-4 left-4 max-w-sm">
-              <p className="text-white font-display font-bold text-lg leading-snug">{currentProject.name}</p>
-              <p className="text-white/60 text-xs font-body mt-1">{currentProject.period} · {currentProject.location}</p>
-              {currentProject.amount !== "Post-sismo" && currentProject.amount !== "—" && (
-                <p className="text-[#e63946] text-xs font-display font-semibold mt-1">{currentProject.amount}</p>
+            {/* Main image */}
+            <div className="relative flex-1 flex items-center justify-center px-14 min-h-0">
+              {currentProject.images.length > 1 && (
+                <button onClick={prevImage}
+                  className="absolute left-2 w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200 z-10"
+                  aria-label="Anterior">
+                  <ChevronLeft size={22} />
+                </button>
+              )}
+
+              <motion.div
+                key={lightbox.imageIndex}
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+                className="relative w-full h-full"
+              >
+                <Image
+                  src={currentProject.images[lightbox.imageIndex]}
+                  alt={`${currentProject.name} — foto ${lightbox.imageIndex + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority
+                />
+              </motion.div>
+
+              {currentProject.images.length > 1 && (
+                <button onClick={nextImage}
+                  className="absolute right-2 w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200 z-10"
+                  aria-label="Siguiente">
+                  <ChevronRight size={22} />
+                </button>
               )}
             </div>
 
+            {/* Thumbnail strip — all images */}
             {currentProject.images.length > 1 && (
-              <button onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200"
-                aria-label="Anterior">
-                <ChevronLeft size={20} />
-              </button>
+              <div className="flex-shrink-0 px-6 py-4">
+                <div className="flex gap-2 overflow-x-auto pb-1 justify-center">
+                  {currentProject.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setLightbox({ projectId: lightbox.projectId, imageIndex: idx })}
+                      className={`relative flex-shrink-0 w-20 h-14 overflow-hidden transition-all duration-200
+                        ${idx === lightbox.imageIndex
+                          ? "ring-2 ring-[#e63946] opacity-100"
+                          : "opacity-40 hover:opacity-80"
+                        }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`Miniatura ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                    </button>
+                  ))}
+                </div>
+                <p className="text-center text-white/30 text-xs font-body mt-2">
+                  {lightbox.imageIndex + 1} / {currentProject.images.length}
+                </p>
+              </div>
             )}
-
-            <motion.div
-              key={lightbox.imageIndex}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.25 }}
-              className="relative w-full max-w-5xl aspect-[16/10]"
-            >
-              <Image
-                src={currentProject.images[lightbox.imageIndex]}
-                alt={currentProject.name}
-                fill
-                className="object-contain"
-                sizes="100vw"
-              />
-            </motion.div>
-
-            {currentProject.images.length > 1 && (
-              <button onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-200"
-                aria-label="Siguiente">
-                <ChevronRight size={20} />
-              </button>
-            )}
-
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-              {currentProject.images.map((_, idx) => (
-                <button key={idx}
-                  onClick={() => setLightbox({ projectId: lightbox.projectId, imageIndex: idx })}
-                  className={`w-1.5 h-1.5 rounded-full transition-colors duration-200
-                    ${idx === lightbox.imageIndex ? "bg-[#e63946]" : "bg-white/30 hover:bg-white/60"}`}
-                />
-              ))}
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

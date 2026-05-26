@@ -48,15 +48,15 @@ export default function Navbar() {
           scrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100" : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-40 md:h-60">
+        <nav className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
           <Link href="/" className="relative z-10 flex-shrink-0">
             <Image
               src="/GDI_logo_v2.png"
               alt="GDI - Grupo Desarrollador Industrial"
-              width={480}
-              height={480}
-              className="h-56 w-auto object-contain"
+              width={200}
+              height={200}
+              className="h-16 w-auto object-contain"
               priority
             />
           </Link>
