@@ -407,7 +407,7 @@ export default function ProyectosPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/97 flex flex-col"
+            className="fixed inset-0 z-50 bg-black flex flex-col"
             onClick={(e) => { if (e.target === e.currentTarget) setLightbox(null); }}
           >
             {/* Header */}
